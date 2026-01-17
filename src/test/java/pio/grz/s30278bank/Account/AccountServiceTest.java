@@ -9,6 +9,7 @@ import pio.grz.s30278bank.Finances.Finances;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -33,5 +34,16 @@ class AccountServiceTest {
 
         assertEquals(100L, saldo);
     }
+
+    @Test
+    void shouldRegisterAccount(){
+        int id = 5;
+        Long saldo = 300L;
+        accountService.registerAccount(id, saldo);
+
+        assertThat(accountRepository.findById(5).isPresent());
+    }
+
+
 
 }
