@@ -30,13 +30,20 @@ public class FinancesService {
     public void deposit(int id, Long amount) {
         Account account = accountService.getUsersAccount(id);
         account.setSaldo(account.getSaldo() + amount);
+        if(account.getId() == id){
+            setStatus(Status.ACCEPTED);
+        }else {
+            setStatus(Status.DECLINED);
+        }
     }
 
     public void transfer(int id, Long amount) {
         Account account = accountService.getUsersAccount(id);
         if (account.getSaldo() >= amount) {
             account.setSaldo(account.getSaldo() - amount);
+            setStatus(Status.ACCEPTED);
         } else {
+            setStatus(Status.DECLINED);
             throw new RuntimeException("Insufficient funds on account " + id);
         }
     }
