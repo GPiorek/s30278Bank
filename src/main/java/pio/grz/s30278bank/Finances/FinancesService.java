@@ -30,9 +30,9 @@ public class FinancesService {
     public void deposit(int id, Long amount) {
         Account account = accountService.getUsersAccount(id);
         account.setSaldo(account.getSaldo() + amount);
-        if(account.getId() == id){
+        if (account.getId() == id) {
             setStatus(Status.ACCEPTED);
-        }else {
+        } else {
             setStatus(Status.DECLINED);
         }
     }
